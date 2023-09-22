@@ -1,6 +1,13 @@
 #include <stdio.h>
 
 int main() {
-    printf("Hello, world!");
+    int a, b;
+    printf("Input a: ");
+    scanf("%d", &a);
+    printf("Input b: ");
+    scanf("%d", &b);
+    printf("a + b = %d\n",a+b);
+    printf("END");
     return 0;
 }
+
