@@ -35,36 +35,36 @@ int main() {
     d = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)); //считаем рассто€ние между центрами окружностей 
 
     if ((x1 == x2) && (y1 == y2) && (r1 == r2)) {
-        printf("ќкружности с одинаковым центром и радиусом");
+        printf("Circles with the same center and radius");
         return 0;
     }
     if (d == r1 + r2) {
-        printf("ќкружности пересекаютс€ в одной точке");
+        printf("Circles intersect at one point");
         return 0;
     }
 
     if ((d > 0) && (d < fabs(r1 - r2))) {
-        printf("ќбщих точек нет, одна окружность внутри другой");
+        printf("There are no common points, one circle inside another");
         return 0;
     }
 
     if (d > r1 + r2) {
-        printf("ќбщих точек нет");
+        printf("There are no common points");
         return 0;
     }
 
     if ((d > fabs(r1 - r2)) && (d < r1 + r2)) {
-        printf("ќкружности пересекаютс€ в двух точках");
+        printf("Circles intersect at two points");
         return 0;
     }
 
     if ((d == 0) && (r1 != r2)) {
-        printf("ќбщих точек нет, окружности с одинаковым центром, одна больше другой");
+        printf("There are no common points, circles with the same center, one larger than the other");
         return 0;
     }
 
     if (d = fabs(r1 - r2)) {
-        printf("ќкружности пересекаютс€ в одной точке, одна окружность внутри другой");
+        printf("Circles intersect at one point, one circle inside another");
         return 0;
     }
 
