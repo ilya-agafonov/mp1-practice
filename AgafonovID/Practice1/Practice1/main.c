@@ -29,11 +29,10 @@ int main() {
     m5 = dsp * d * w_polok * 0.015; // масса одной полки
 
     int k_polok = 0;
-    while (h > 41.5) {
-        h = h - 40 - 1.5;
+    while (h > 0.415) {
+        h = h - 0.4 - 0.015;
         k_polok++;
     }
-
     m_polok = m5 * k_polok;
 
     m = m1 + m2 + m3 + m4 + m_polok;
