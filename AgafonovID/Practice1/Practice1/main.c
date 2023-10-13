@@ -6,7 +6,7 @@
 int main() {
     setlocale(LC_ALL, "Rus");
     int dvp = 1100, dsp = 750, wood = 700;
-    float m, p, v; // m  - масса, p - плотность, v - объем
+    float m; // m  - масса
     float h, w, d, m1, m2, m3, m4, m5;
     float w_polok, m_polok; // ширина и масса полок
 
