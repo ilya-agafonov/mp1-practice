@@ -58,11 +58,7 @@ int main() {
         return 0;
     }
 
-    if ((d > fabs(r1 - r2)) && (d < r1 + r2)) {
-        printf("Circles intersect at two points");
-        return 0;
-    }
-
+    printf("Circles intersect at two points");
 
     return 0;
 }
