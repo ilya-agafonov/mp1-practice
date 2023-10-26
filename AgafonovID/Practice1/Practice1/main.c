@@ -10,15 +10,15 @@ int main() {
     char p;
     int true = 0;
 
-    printf("Выберите режим игры(1 - отгадываете число, 2 - загадываете): \n");
+    printf("Выберите режим (1 - отгадываете число, 2 - загадываете): \n");
     scanf("%d", &game);
     while (game < 1 || game > 2) {
         printf("Неверный ввод, попробуй еще раз: \n");
         scanf("%d", &game);
     }
     if (game == 1) {
-        srand((unsigned int)time(NULL));
-        number = 1 + rand() % (1000-1+1);
+        srand((unsigned int)time(0));
+        number = 1 + rand() % 1000;
         printf("Загадано число от 1 до 1000\n");
         printf("Попробуй отгадать это число: \n");
         scanf("%d", &n);
@@ -59,10 +59,10 @@ int main() {
             printf("Это число %d?: \n", n2);
             scanf(" %c", &p);
             if (p == '<') {
-                b = n2 + 1;
+                b = n2 - 1;
                 attempts2++;            }
             if (p == '>') {
-                a = n2 - 1;
+                a = n2 + 1;
                 attempts2++;
             }
             if (p == '=') {
