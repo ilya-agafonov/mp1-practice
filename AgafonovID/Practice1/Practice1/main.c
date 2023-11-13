@@ -57,7 +57,7 @@ int main() {
         while (true != 1) {
             n2 = (a + b) / 2;
             printf("Это число %d?: \n", n2);
-            scanf(" %c", &p);
+            scanf("%*c%c", &p);
             if (p == '<') {
                 b = n2 - 1;
                 attempts2++;            }
