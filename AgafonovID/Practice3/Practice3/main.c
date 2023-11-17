@@ -9,7 +9,7 @@ int main() {
     setlocale(LC_ALL, "Rus");
     srand((unsigned int)time(0));
 
-    int length, i, j, digit, temp, bulls, cows, gameover = 0;
+    int length, i, j, digit, temp, bulls, cows, n, gameover = 0;
     int number[N], num[N];
     printf("Игра быки-коровы\n");
     printf("Выбери число какой длины мне загадать(от 2 до 5)\n");
@@ -29,17 +29,25 @@ int main() {
             }
         }
     }
-    for (int i = 0; i < length; i++) {
+    /*for (int i = 0; i < length; i++) {
         printf("%d ", number[i]);
     }
     printf("\n");
+    */
     printf("Попробуй угадать число: \n");
     while (gameover != 1) {
         cows = 0;
         bulls = 0;
-        for (i = 0; i < length; i++) {
-            scanf("%1d", &num[i]);
+        scanf("%d", &n);
+        for (i = length - 1; i >= 0; i--) {
+            num[i] = n % 10;
+            n /= 10;
         }
+        /*for (i = 0; i < length; i++) {
+            printf("%d ", num[i]);
+        }
+        printf("\n");
+        */
         for (i = 0; i < length; i++) {
             for (j = 0; j < length; j++) {
                 if (number[i] == num[j]) {
