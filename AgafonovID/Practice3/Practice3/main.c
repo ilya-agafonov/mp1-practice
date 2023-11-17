@@ -29,11 +29,6 @@ int main() {
             }
         }
     }
-    /*for (int i = 0; i < length; i++) {
-        printf("%d ", number[i]);
-    }
-    printf("\n");
-    */
     printf("Попробуй угадать число: \n");
     while (gameover != 1) {
         cows = 0;
@@ -43,11 +38,6 @@ int main() {
             num[i] = n % 10;
             n /= 10;
         }
-        /*for (i = 0; i < length; i++) {
-            printf("%d ", num[i]);
-        }
-        printf("\n");
-        */
         for (i = 0; i < length; i++) {
             for (j = 0; j < length; j++) {
                 if (number[i] == num[j]) {
