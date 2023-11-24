@@ -6,7 +6,9 @@ int barcodes[N][4] = { {9,9,6,8}, {5,8,8,0}, {1,9,4,3}, {9,9,0,1}, {5,7,3,3}, {7
 char* product[N] = { "Хлеб", "Молоко", "Яйца", "Сыр",  "Сахар", "Курица", "Макароны", "Масло", "Яблоки", "Чай" };
 float price[N] = { 30, 60, 90, 200, 90, 300, 60, 100, 70, 120 };
 float discounts[N] = { 0, 5, 12, 15, 10, 8, 30, 23, 45, 35 };
+
 char* receipt_products[N];
+float prices[N];
 int quantity_products[N];
 float amount[N];
 
@@ -30,15 +32,17 @@ int main() {
 }
 
 int barcode_verification(int* code) {
-    int i,j;
+    int i, j, flag;
     for (i = 0; i < N; i++) {
+        flag = 1;
         for (j = 0; j < 4; j++) {
             if (barcodes[i][j] != code[j]) {
+                flag = 0;
                 break;
             }
-            if (j == 3) {
-                return i;
-            }
+        }
+        if (flag) {
+            return i;
         }
     }
     return -1;
@@ -70,8 +74,12 @@ void scan_product() {
 void add_receipt(int id) {
     int quantity, add;
     float cost;
-    printf("Добавить товар?\n");
+    printf("Добавить товар?(1 - да, 0 - нет)\n");
     scanf("%d", &add);
+    while (add > 1 || add < 0) {
+        printf("Неверный ответ\n");
+        scanf("%d", &add);
+    }
     if (add == 1) {
         printf("Количество товара: \n");
         scanf("%d", &quantity);
@@ -87,10 +95,15 @@ void generate_receipt(int id, int quantity, float cost) {
     int end;
     printf("Товар: %s, цена за 1 шт: %.2f, количество: %d, сумма: %.2f\n", product[id], price[id], quantity, cost);
     receipt_products[i] = product[id];
+    prices[i] = price[id];
     quantity_products[i] = quantity;
     amount[i] = cost;
-    printf("Продолжить?\n");
+    printf("Продолжить покупку?(1 - да, 0 - нет)\n");
     scanf("%d", &end);
+    while (end > 1 || end < 0) {
+        printf("Неверный ответ\n");
+        scanf("%d", &end);
+    }
     if (end == 1) {
         i++;
         attempts++;
@@ -104,8 +117,8 @@ void generate_receipt(int id, int quantity, float cost) {
 void print_receipt() {
     printf("\t Ваш чек за покупку:\n");
     for (i = 0; i < attempts; i++) {
-        printf("Товар: %s, количество: %d, сумма: %.2f\n", receipt_products[i], quantity_products[i], amount[i]);
+        printf("Товар: %s, стоимость за 1 шт: %.2f, количество: %d, сумма: %.2f\n", receipt_products[i], prices[i], quantity_products[i], amount[i]);
     }
 }
 
-// Сделать/улучшить контроль ввода, сделать проверки,
+//Штрихкоды - массив строк
