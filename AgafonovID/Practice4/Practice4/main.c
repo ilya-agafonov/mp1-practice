@@ -3,10 +3,12 @@
 #include <string.h>
 
 #define N 10
+#define MAX_LEN 255
+
 char* barcodes[N] = { "9968", "5880", "1943", "9901", "5733", "7826", "4861", "2469", "5990", "1284" };
 char* product[N] = { "Хлеб", "Молоко", "Яйца", "Сыр",  "Сахар", "Курица", "Макароны", "Масло", "Яблоки", "Чай" };
-float price[N] = { 30, 60, 90, 200, 90, 300, 60, 100, 70, 120 };
-float discounts[N] = { 0, 5, 12, 15, 10, 8, 30, 23, 45, 35 };
+float price[N] = { 30.f, 60.f, 90.f, 200.f, 90.f, 300.f, 60.f, 100.f, 70.f, 120.f };
+float discounts[N] = { 0.f, 5.f, 12.f, 15.f, 10.f, 8.f, 30.f, 23.f, 45.f, 35.f };
 
 char* receipt_products[N];
 float prices[N];
@@ -43,7 +45,7 @@ int barcode_verification(char* code) {
 }
 
 void scan_product() {
-    char code[5];
+    char code[MAX_LEN];
     int id;
     printf("Введите штрихкод: \n");
     scanf("%s", code);
@@ -121,3 +123,4 @@ void print_receipt() {
     }
     printf("Итоговая сумма: %.2f", sum);
 }
+//убрать рекурсию
