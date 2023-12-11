@@ -46,18 +46,17 @@ int barcode_verification(char* code) {
 
 void scan_product() {
     char code[MAX_LEN];
-    int id;
-    printf("Введите штрихкод: \n");
-    scanf("%s", code);
-    id = barcode_verification(code);
-    if (id == -1) {
-        printf("Неверный штрихкод\n");
-        scan_product();
+    int i, id, incorrect = 1;
+    while (incorrect) {
+        printf("Введите штрихкод: \n");
+        scanf("%s", code);
+        id = barcode_verification(code);
+        if (id != -1) {
+            incorrect = 0;
+        }
     }
-    else {
-        printf("Товар: %s, цена: %.0f, скидка: %.0f%%\n", product[id], price[id], discounts[id]);
-        add_receipt(id);
-    }
+    printf("Товар: %s, цена: %.0f, скидка: %.0f%%\n", product[id], price[id], discounts[id]);
+    add_receipt(id);
 }
 
 void add_receipt(int id) {
@@ -123,4 +122,3 @@ void print_receipt() {
     }
     printf("Итоговая сумма: %.2f", sum);
 }
-//убрать рекурсию
