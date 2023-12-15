@@ -40,6 +40,7 @@ void insert_sorting(fileinfo files[], int k) {
     }
 }
 
+
 void find_files(char *path, fileinfo files[], int* k) {
     char search_path[MAX_LEN];
     snprintf(search_path, MAX_LEN, "%s\\*.*", path);
@@ -69,11 +70,15 @@ void sorted_files(fileinfo files[], int k) {
 
 int main() {
     setlocale(LC_ALL, "Rus");
+    srand((unsigned int)time(0));
     int method, true = 0, k = 0;
     char path[MAX_LEN];
+    clock_t start, finish;
+    double duration;
     printf("Файловый менеджер\n");
     printf("Введите путь: \n");
     scanf("%s", &path);
+    fflush(stdin);
 
     fileinfo files[1000];
     find_files(path, files, &k);
@@ -81,8 +86,9 @@ int main() {
     printf("Какой метод сортировки использовать?(1 - пузырьком, 2 - вставками, 3 - слиянием):\n");
     while (true != 1) {
         scanf("%d", &method);
+        start = clock();
         switch (method) {
-        case 1:
+        case 1: 
             bubble_sorting(files, k);
             sorted_files(files, k);
             true = 1;
@@ -101,6 +107,10 @@ int main() {
             printf("Неверный ввод\n");
             break;
         }
+        finish = clock();
+        duration = ((double)(finish - start)) / CLOCKS_PER_SEC;
+        printf("Время выполнения %.3lfс\n", duration);
     }
     return 0;
 }
+//Исправить ввод пути
