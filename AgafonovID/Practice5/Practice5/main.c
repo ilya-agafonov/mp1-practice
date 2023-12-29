@@ -12,6 +12,11 @@ typedef struct {
     int size;
 }fileinfo;
 
+typedef struct {
+    char names[MAX_LEN];
+    int size;
+}fileinfo_cpy;
+
 int count_files(char* path) {
     int k = 0;
     char search_path[MAX_LEN];
@@ -137,59 +142,85 @@ void sorted_files(fileinfo files[], int k) {
         printf("Имя файла %s, размер %d байт\n", files[i].names, files[i].size);
     }
 }
+void cpy(fileinfo files[],fileinfo_cpy files2[], int k) {
+    for (int i = 0; i < k; i++) {
+        strcpy(files2[i].names, files[i].names);
+        (files2)[i].size = files[i].size;
+    }
+}
+void cpy_back(fileinfo files[], fileinfo_cpy files2[], int k) {
+    for (int i = 0; i < k; i++) {
+        strcpy(files[i].names, files2[i].names);
+        (files)[i].size = files2[i].size;
+    }
+}
 
 int main() {
-    setlocale(LC_ALL, "Rus");
     char path[MAX_LEN];
     int len, k, method, true = 0;
     clock_t start, finish;
     double duration;
+    len = strlen(path);
+    k = count_files(path);
+    fileinfo* files = (fileinfo*)malloc(k * sizeof(fileinfo));
+    fileinfo_cpy* files2 = (fileinfo_cpy*)malloc(k * sizeof(fileinfo_cpy));
+
+    setlocale(LC_ALL, "Rus");
 
     printf("Файловый менеджер\n");
     printf("Введите путь: \n");
     fgets(path, MAX_LEN, stdin);
-    len = strlen(path);
+    
     if (len > 0 && path[len - 1] == '\n') {
         path[len - 1] = '\0';
     }
-    k = count_files(path);
-    fileinfo* files = (fileinfo*)malloc(k * sizeof(fileinfo));
+    
     if (files == NULL) {
         printf("Ошибка выделения памяти\n");
         return 1;
     }
     find_files(path, files, k);
-
-    printf("Какой метод сортировки использовать?(1 - пузырьком, 2 - вставками, 3 - слиянием):\n");
+    cpy(files, files2, k);
+    
     while (true != 1) {
+        printf("Какой метод сортировки использовать?(1 - пузырьком, 2 - вставками, 3 - слиянием, 4 - выйти):\n");
         scanf("%d", &method);
         switch (method) {
         case 1:
             start = clock();
             bubble_sorting(files, k);
             sorted_files(files, k);
-            true = 1;
+            finish = clock();
+            duration = ((double)(finish - start)) / CLOCKS_PER_SEC;
+            printf("Время выполнения %.3lfс\n", duration);
             break;
         case 2:
             start = clock();
             insert_sorting(files, k);
             sorted_files(files, k);
-            true = 1;
+            finish = clock();
+            duration = ((double)(finish - start)) / CLOCKS_PER_SEC;
+            printf("Время выполнения %.3lfс\n", duration);
             break;
         case 3:
             start = clock();
             merge_sort(files, 0, k - 1);
             sorted_files(files, k);
+            finish = clock();
+            duration = ((double)(finish - start)) / CLOCKS_PER_SEC;
+            printf("Время выполнения %.3lfс\n", duration);
+            break;
+        case 4:
             true = 1;
             break;
         default:
             printf("Неверный ввод\n");
             break;
         }
-        finish = clock();
-        duration = ((double)(finish - start)) / CLOCKS_PER_SEC;
-        printf("Время выполнения %.3lfс\n", duration);
+        cpy_back(files, files2, k);
+        
     }
     free(files);
+    free(files2);
     return 0;
 }
