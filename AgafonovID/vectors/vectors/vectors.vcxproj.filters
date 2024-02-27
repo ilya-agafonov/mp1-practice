@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="func.h">
+    <ClInclude Include="vector.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
