@@ -42,12 +42,12 @@ void read(const char* filename, TVector* v1, TVector* v2) {
         printf("Файл не найден");
         exit(1);
     }
-    fscanf(file, " %d ", &(v1->n));
+    fscanf(file, " %d \n", &(v1->n));
     v1->x = (double*)malloc(sizeof(double) * v1->n);
     for (int i = 0; i < v1->n; i++) {
         fscanf(file, "%lf ", &(v1->x[i]));
     }
-    fscanf(file, " %d ", &(v2->n));
+    fscanf(file, " %d \n", &(v2->n));
     v2->x = (double*)malloc(sizeof(double) * v2->n);
     for (int i = 0; i < v2->n; i++) {
         fscanf(file, "%lf ", &(v2->x[i]));
