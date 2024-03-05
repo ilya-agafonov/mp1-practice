@@ -1,28 +1,30 @@
-#include <stdio.h>
+п»ї#include <stdio.h>
 #include <locale.h>
 #include "vector.h"
 
-int main() {
+int main(int argc, char** argv) {
     int n;
     double p;
     TVector v1, v2, s, dif;
+    char* infilename, *outfilename;
 
     setlocale(LC_ALL, "Rus");
 
-    printf("Длина v1: ");
-    scanf("%d", &n);
-    alloc(&v1, n);
-    printf("Длина v2: ");
-    scanf("%d", &n);
-    alloc(&v2, n);
-    fill(&v1);
-    fill(&v2);
+    if (argc < 4) {
+        printf("РќРµРІРµСЂРЅС‹Рµ Р°СЂРіСѓРјРµРЅС‚С‹\n");
+        return 1;
+    }
+    n = atoi(argv[1]);
+    printf("n = %d\n", n);
+    infilename = argv[2];
+    printf("in file name: %s\n", infilename);
+    outfilename = argv[3];
+    printf("out file name: %s\n", outfilename);
+    read(infilename, &v1, &v2);
     s = sum(&v1, &v2);
     dif = subtraction(&v1, &v2);
     p = scalar_product(&v1, &v2);
-    print(&s);
-    print(&dif);
-    printf("%.2lf", p);
+    write(outfilename, &s, &dif, &p);
     if (s.x != NULL) {
         free(s.x);
     }
@@ -34,16 +36,41 @@ int main() {
     return 0;
 }
 
-void alloc(TVector* v, int n) {
-    v->n = n;
-    v->x = (double*)malloc(sizeof(double) * n);
+void read(const char* filename, TVector* v1, TVector* v2) {
+    FILE* file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Р¤Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ");
+        exit(1);
+    }
+    fscanf(file, " %d ", &(v1->n));
+    v1->x = (double*)malloc(sizeof(double) * v1->n);
+    for (int i = 0; i < v1->n; i++) {
+        fscanf(file, "%lf ", &(v1->x[i]));
+    }
+    fscanf(file, " %d ", &(v2->n));
+    v2->x = (double*)malloc(sizeof(double) * v2->n);
+    for (int i = 0; i < v2->n; i++) {
+        fscanf(file, "%lf ", &(v2->x[i]));
+    }
+    fclose(file);
 }
 
-void fill(TVector* v) {
-    printf("Веедите координаты вектора: ");
-    for (int i = 0; i < v->n; i++) {
-        scanf("%lf", &(v->x[i]));
+void write(const char* filename, TVector* s, TVector* dif, double* p) {
+    FILE* file = fopen(filename, "w+");
+    if (file == NULL) {
+        printf("Р¤Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅw");
+        exit(1) ;
     }
+    fprintf(file, "sum = ");
+    for (int i = 0; i < s->n; i++) {
+        fprintf(file, "%.2lf ", s->x[i]);
+    }
+    fprintf(file, "\ndif = ");
+    for (int i = 0; i < dif->n; i++) {
+        fprintf(file, "%.2lf ", dif->x[i]);
+    }
+    fprintf(file, "\np = %.2lf", *p);
+    fclose(file);
 }
 
 void print(TVector* v) {
@@ -53,9 +80,14 @@ void print(TVector* v) {
     printf("\n");
 }
 
+void alloc(TVector* v, int n) {
+    v->n = n;
+    v->x = (double*)malloc(sizeof(double) * n);
+}
+
 TVector sum(TVector* v1, TVector* v2) {
     if (v1->n != v2->n) {
-        printf("Длины векторов разные");
+        printf("Р”Р»РёРЅС‹ РІРµРєС‚РѕСЂРѕРІ СЂР°Р·РЅС‹Рµ");
         exit(0);
     }
     TVector v3;
@@ -68,7 +100,7 @@ TVector sum(TVector* v1, TVector* v2) {
 
 TVector subtraction(TVector* v1, TVector* v2) {
     if (v1->n != v2->n) {
-        printf("Длины векторов разные");
+        printf("Р”Р»РёРЅС‹ РІРµРєС‚РѕСЂРѕРІ СЂР°Р·РЅС‹Рµ");
         exit(0);
     }
     TVector v3;
@@ -81,7 +113,7 @@ TVector subtraction(TVector* v1, TVector* v2) {
 
 double scalar_product(TVector* v1, TVector* v2) {
     if (v1->n != v2->n) {
-        printf("Длины векторов разные");
+        printf("Р”Р»РёРЅС‹ РІРµРєС‚РѕСЂРѕРІ СЂР°Р·РЅС‹Рµ");
         exit(0);
     }
     double res = 0;

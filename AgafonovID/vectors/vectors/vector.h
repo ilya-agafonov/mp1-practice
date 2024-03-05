@@ -8,7 +8,8 @@ typedef struct {
     double* x;
 }TVector;
 
-
+void read(const char* filename, TVector* v1, TVector* v2);
+void write(const char* filename, TVector* v1, TVector* v2);
 void alloc(TVector* v, int n);
 void fill(TVector* v);
 void print(TVector* v);
