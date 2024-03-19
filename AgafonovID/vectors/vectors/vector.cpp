@@ -3,81 +3,81 @@
 #include "vector.h"
 
 TVector::TVector() {
-    //std::cout << "TVector::TVector()" << std::endl;
+    std::cout << "TVector::TVector()" << std::endl;
     this->n = 0;
     this->x = nullptr;
 }
 
 TVector::TVector(int n) {
+    std::cout << "TVector::TVector(int n)" << std::endl;
     this->n = n;
-    x = new double[n];
+    this->x = new double[this->n];
 }
 
 TVector::TVector(const TVector& a) {
-    //std::cout << "TVector::TVector(const TVector& a)" << std::endl;
-    n = a.n;
-    x = new double[n];
-    for (int i = 0; i < n; i++) {
-        x[i] = a.x[i];
+    std::cout << "TVector::TVector(const TVector& a)" << std::endl;
+    this->n = a.n;
+    this->x = new double[this->n];
+    for (int i = 0; i < this->n; i++) {
+        this->x[i] = a.x[i];
     }
 }
 
 TVector::~TVector(){
-    delete[] x;
+    std::cout << "TVector::~TVector()" << std::endl;
+    delete[] this->x;
 }
 
 TVector TVector:: operator+(const TVector& b) {
-    //std::cout << "TVector TVector:: operator+(const TVector& b)" << std::endl;
-    if (n != b.n) {
-        throw "The sizes don't match";
+    std::cout << "TVector TVector:: operator+(const TVector& b)" << std::endl;
+    if (this->n != b.n) {
+        throw std::exception("Different len");
     }
-    TVector res(n);
-    for (int i = 0; i < n; i++) {
-        res.x[i] = x[i] + b.x[i];
+    TVector res(this->n);
+    for (int i = 0; i < this->n; i++) {
+        res.x[i] = this->x[i] + b.x[i];
     }
     return res;
 }
 
 TVector TVector::operator-(const TVector& b) {
-    //std::cout << "TVector TVector::operator-(const TVector& b)" << std::endl;
-    if (b.n != n) {
-        throw "The sizes don't match";
+    std::cout << "TVector TVector::operator-(const TVector& b)" << std::endl;
+    if (this->n != b.n) {
+        throw std::exception("Different len");
     }
-    TVector res(n);
-    for (int i = 0; i < n; i++) {
-        res.x[i] = x[i] - b.x[i];
+    TVector res(this->n);
+    for (int i = 0; i < this->n; i++) {
+        res.x[i] = this->x[i] - b.x[i];
     }
     return res;
 }
 
 double TVector::operator*(const TVector &b) {
-    //std::cout << "double TVector::operator*(const TVector &b)" << std::endl;
-    if (n != b.n) {
-        throw "The sizes don't match";
+    std::cout << "double TVector::operator*(const TVector &b)" << std::endl;
+    if (this->n != b.n) {
+        throw std::exception("Different len");
     }
     double res = 0;
-    for (int i = 0; i < n; i++) {
-        res += x[i] * b.x[i];
+    for (int i = 0; i < b.n; i++) {
+        res += this->x[i] * b.x[i];
     }
     return res;
 }
 
-TVector TVector::operator=(const TVector& b) {
-    //std::cout << "TVector TVector::operator=(const TVector& b)" << std::endl;
-    if (this == &b) {
-        return *this;
-    }
-    delete[] x;
-    n = b.n;
-    x = new double[n];
-    for (int i = 0; i < n; i++) {
-        x[i] = b.x[i];
+const TVector& TVector::operator=(const TVector& b) {
+    if (this != &b) { 
+        delete[] x;   
+        n = b.n;      
+        x = new double[n]; 
+        for (int i = 0; i < n; i++) {
+            x[i] = b.x[i]; 
+        }
     }
     return *this;
 }
 
 std::istream& operator>>(std::istream& in, TVector& v) {
-    //std::cout << "std::istream & operator>>(std::istream & in, TVector & v)" << std::endl;
+    std::cout << "std::istream& operator>>(std::istream& in, TVector& v)" << std::endl;
     std::cout << "Input n" << std::endl;
     in >> v.n;
     std::cout << "Input x" << std::endl;
@@ -92,7 +92,7 @@ std::istream& operator>>(std::istream& in, TVector& v) {
 }
 
 std::ostream& operator<<(std::ostream& out,const TVector& v) {
-    //std::cout << "std::ostream& operator<<(std::ostream& out, TVector& v)" << std::endl;
+    std::cout << "std::ostream& operator<<(std::ostream& out,const TVector& v)" << std::endl;
     out << "Vector: ";
     for (int i = 0; i < v.n; i++) {
         out << v.x[i] << " ";
