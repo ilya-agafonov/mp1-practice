@@ -16,7 +16,7 @@ struct TVector {
     double operator*(const TVector&);
     const TVector& operator=(const TVector&);
     friend std::ifstream& operator>>(std::ifstream& in, TVector& v) {
-        std::cout << "friend std::ifstream& operator>>(std::ifstream& in, TVector& v)" << std::endl;
+        //std::cout << "friend std::ifstream& operator>>(std::ifstream& in, TVector& v)" << std::endl;
         in >> v.n;
         if (v.x != nullptr) {
             delete[] v.x;
@@ -28,7 +28,7 @@ struct TVector {
         return in;
     }
     friend std::ofstream& operator<<(std::ofstream& out, TVector& v) {
-        std::cout << "friend std::ofstream& operator<<(std::ofstream& out, TVector& v)" << std::endl;
+        //std::cout << "friend std::ofstream& operator<<(std::ofstream& out, TVector& v)" << std::endl;
         out << "Vector ";
         for (int i = 0; i < v.n; i++) {
             out << v.x[i] << " ";

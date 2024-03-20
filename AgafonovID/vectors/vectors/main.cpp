@@ -6,6 +6,11 @@ int main(int argc, char** argv) {
     TVector v1, v2, sum, dif;
     double p; 
 
+    if (argc < 3) {
+        std::cout << "Incorrect arguments" << std::endl;
+        exit(1);
+    }
+
     infile = argv[1];
     outfile = argv[2];
     std::cout << "infile name: " << infile << std::endl;
@@ -20,6 +25,7 @@ int main(int argc, char** argv) {
     }
     A >> v1 >> v2;
     A.close();
+
     try {
         sum = v1 + v2;
         dif = v1 - v2;
@@ -36,7 +42,7 @@ int main(int argc, char** argv) {
 
     B << v1<<std::endl;
     B << v2 << std::endl;
-    B <<"Sum" << sum << std::endl;
+    B <<"Sum " << sum << std::endl;
     B << "Dif " << dif << std::endl;
     B << "scalar product = " << p << std::endl;
     B.close();

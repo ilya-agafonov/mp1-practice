@@ -3,19 +3,19 @@
 #include "vector.h"
 
 TVector::TVector() {
-    std::cout << "TVector::TVector()" << std::endl;
+    //std::cout << "TVector::TVector()" << std::endl;
     this->n = 0;
     this->x = nullptr;
 }
 
 TVector::TVector(int n) {
-    std::cout << "TVector::TVector(int n)" << std::endl;
+    //std::cout << "TVector::TVector(int n)" << std::endl;
     this->n = n;
     this->x = new double[this->n];
 }
 
 TVector::TVector(const TVector& a) {
-    std::cout << "TVector::TVector(const TVector& a)" << std::endl;
+    //std::cout << "TVector::TVector(const TVector& a)" << std::endl;
     this->n = a.n;
     this->x = new double[this->n];
     for (int i = 0; i < this->n; i++) {
@@ -24,12 +24,12 @@ TVector::TVector(const TVector& a) {
 }
 
 TVector::~TVector(){
-    std::cout << "TVector::~TVector()" << std::endl;
+    //std::cout << "TVector::~TVector()" << std::endl;
     delete[] this->x;
 }
 
 TVector TVector:: operator+(const TVector& b) {
-    std::cout << "TVector TVector:: operator+(const TVector& b)" << std::endl;
+    //std::cout << "TVector TVector:: operator+(const TVector& b)" << std::endl;
     if (this->n != b.n) {
         throw std::exception("Different len");
     }
@@ -41,7 +41,7 @@ TVector TVector:: operator+(const TVector& b) {
 }
 
 TVector TVector::operator-(const TVector& b) {
-    std::cout << "TVector TVector::operator-(const TVector& b)" << std::endl;
+    //std::cout << "TVector TVector::operator-(const TVector& b)" << std::endl;
     if (this->n != b.n) {
         throw std::exception("Different len");
     }
@@ -53,7 +53,7 @@ TVector TVector::operator-(const TVector& b) {
 }
 
 double TVector::operator*(const TVector &b) {
-    std::cout << "double TVector::operator*(const TVector &b)" << std::endl;
+    //std::cout << "double TVector::operator*(const TVector &b)" << std::endl;
     if (this->n != b.n) {
         throw std::exception("Different len");
     }
@@ -65,19 +65,19 @@ double TVector::operator*(const TVector &b) {
 }
 
 const TVector& TVector::operator=(const TVector& b) {
-    if (this != &b) { 
-        delete[] x;   
-        n = b.n;      
-        x = new double[n]; 
-        for (int i = 0; i < n; i++) {
-            x[i] = b.x[i]; 
-        }
+    if (this == &b) {
+        return *this;
+    } 
+    n = b.n;
+    x = new double[n];
+    for (int i = 0; i < n; i++) {
+        x[i] = b.x[i];
     }
     return *this;
 }
 
 std::istream& operator>>(std::istream& in, TVector& v) {
-    std::cout << "std::istream& operator>>(std::istream& in, TVector& v)" << std::endl;
+    //std::cout << "std::istream& operator>>(std::istream& in, TVector& v)" << std::endl;
     std::cout << "Input n" << std::endl;
     in >> v.n;
     std::cout << "Input x" << std::endl;
@@ -92,7 +92,7 @@ std::istream& operator>>(std::istream& in, TVector& v) {
 }
 
 std::ostream& operator<<(std::ostream& out,const TVector& v) {
-    std::cout << "std::ostream& operator<<(std::ostream& out,const TVector& v)" << std::endl;
+    //std::cout << "std::ostream& operator<<(std::ostream& out,const TVector& v)" << std::endl;
     out << "Vector: ";
     for (int i = 0; i < v.n; i++) {
         out << v.x[i] << " ";

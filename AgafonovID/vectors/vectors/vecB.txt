@@ -1,5 +1,5 @@
 Vector 1 2 3 
-Vector 1 2 2 
-SumVector: 2 4 5 
-Dif Vector: 0 0 1 
-scalar product = 11
+Vector 1 2 3 
+Sum Vector: 2 4 6 
+Dif Vector: 0 0 0 
+scalar product = 14
