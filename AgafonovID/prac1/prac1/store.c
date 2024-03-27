@@ -12,7 +12,9 @@ void read(const char* filename, store* s1) {
     fscanf(file, "%s%*c", s1->phone);
     fscanf(file, "%[^\n]%*c", s1->specialization);
     fscanf(file, "%[^\n]%*c", s1->type);
-    read_worktime(file, &(s1->store_worktime));
+    for (int i = 0; i < 7; i++) {
+        read_worktime(file, &(s1->store_worktime[i]));
+    }
     fclose(file);
 }
 
@@ -27,7 +29,13 @@ void write(const char* filename, store* s) {
     fprintf(file, "%s\n", s->phone);
     fprintf(file, "%s\n", s->specialization);
     fprintf(file, "%s\n", s->type);
-    write_worktime(file, &(s->store_worktime));
+    for (int i = 0; i < 7; i++) {
+        write_worktime(file, &(s->store_worktime[i]));
+        fprintf(file, "\n");
+    }
+    
     fclose(file);
 }
+
+//динамическое выделение памяти для char
 

@@ -45,4 +45,15 @@
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="baza.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+    <Text Include="fileout.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+    <Text Include="baza2.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
