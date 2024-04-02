@@ -3,8 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 
+#define MAX_LEN 255
+
 typedef struct {
-    char street[100];
+    char street[MAX_LEN];
     int house;
 }address;
 

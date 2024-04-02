@@ -1,27 +1,43 @@
-//store.c
 #include "store.h"
 
-void read(const char* filename, store* s1) {
-    FILE* file = fopen(filename, "r");
-    if (file == NULL) {
-        printf("failed to open file read");
+void alloc(store* s) {
+    s->name = (char*)malloc(sizeof(char) * MAX_LEN);
+    s->specialization = (char*)malloc(sizeof(char) * MAX_LEN);
+    s->type = (char*)malloc(sizeof(char) * MAX_LEN);
+    s->phone = (char*)malloc(sizeof(char) * MAX_LEN);
+
+    if (s->name == NULL || s->specialization == NULL || s->type == NULL || s->phone == NULL) {
+        printf("memory allocation error\n");
         exit(1);
     }
-    fscanf(file, "%[^\n]%*c", s1->name);
+}
+
+void dealloc(store* s) {
+    free(s->name);
+    free(s->specialization);
+    free(s->type);
+    free(s->phone);
+}
+
+void read(FILE* file, store* s1) {
+    if (file == NULL) {
+        printf("failed to open file read\n");
+        exit(1);
+    }
+    alloc(s1);
+    fscanf(file, " %[^\n]%*c", s1->name);
     read_address(file, &(s1->store_address));
     fscanf(file, "%s%*c", s1->phone);
-    fscanf(file, "%[^\n]%*c", s1->specialization);
-    fscanf(file, "%[^\n]%*c", s1->type);
+    fscanf(file, " %[^\n]%*c", s1->specialization);
+    fscanf(file, " %[^\n]%*c", s1->type);
     for (int i = 0; i < 7; i++) {
         read_worktime(file, &(s1->store_worktime[i]));
     }
-    fclose(file);
 }
 
-void write(const char* filename, store* s) {
-    FILE* file = fopen(filename, "w");
+void write(FILE* file, store* s) {
     if (file == NULL) {
-        printf("failed to open file write");
+        printf("failed to open file write\n");
         exit(1);
     }
     fprintf(file, "%s\n", s->name);
@@ -33,9 +49,6 @@ void write(const char* filename, store* s) {
         write_worktime(file, &(s->store_worktime[i]));
         fprintf(file, "\n");
     }
-    
-    fclose(file);
+    fprintf(file, "\n");
 }
-
-//динамическое выделение памяти для char
 

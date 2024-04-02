@@ -6,4 +6,4 @@ typedef struct {
 }time;
 
 void readtime(FILE* file, time* wh);
-void writetime(FILE* file, time* wh);
+void writetime(FILE* file, time* wh, time* wh2);
