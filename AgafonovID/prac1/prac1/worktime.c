@@ -17,4 +17,4 @@ int around_the_clock(worktime* wt) {
         tr = 0;
     }
     return tr;
-}   
+}

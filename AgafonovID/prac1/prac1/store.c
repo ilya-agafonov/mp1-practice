@@ -20,19 +20,19 @@ void dealloc(store* s) {
     free(s->store_address.street);
 }
 
-void read(FILE* file, store* s1) {
+void read(FILE* file, store* s) {
     if (file == NULL) {
         printf("failed to open file read\n");
         exit(1);
     }
-    alloc(s1);
-    fscanf(file, " %[^\n]%*c", s1->name);
-    read_address(file, &(s1->store_address));
-    fscanf(file, "%s%*c", s1->phone);
-    fscanf(file, " %[^\n]%*c", s1->specialization);
-    fscanf(file, " %[^\n]%*c", s1->type);
+    alloc(s);
+    fscanf(file, " %[^\n]%*c", s->name);
+    read_address(file, &(s->store_address));
+    fscanf(file, "%s%*c", s->phone);
+    fscanf(file, " %[^\n]%*c", s->specialization);
+    fscanf(file, " %[^\n]%*c", s->type);
     for (int i = 0; i < 7; i++) {
-        read_worktime(file, &(s1->store_worktime[i]));
+        read_worktime(file, &(s->store_worktime[i]));
     }
 }
 

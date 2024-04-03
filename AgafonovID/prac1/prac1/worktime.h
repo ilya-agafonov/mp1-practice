@@ -4,7 +4,7 @@
 #include "time.h"
 
 typedef struct {
-    char workdays[10];
+    char workdays[3];
     time workhours;
     time workhours2;
 }worktime;
