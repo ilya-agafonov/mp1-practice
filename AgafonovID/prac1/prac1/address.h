@@ -1,12 +1,12 @@
 #pragma once
 
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
 #define MAX_LEN 255
 
 typedef struct {
-    char street[MAX_LEN];
+    char* street;
     int house;
 }address;
 

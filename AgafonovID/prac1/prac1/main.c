@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
         printf("failed to open infile\n");
         exit(1);
     }
-    fscanf(infile, " %d", &n);
+    fscanf(infile, "%d", &n);
     store* stores = (store*)malloc(sizeof(store) * n);
     if (stores == NULL) {
         printf("memory allocation error\n");
@@ -38,7 +38,6 @@ int main(int argc, char** argv) {
         }
             
     }
-
     fclose(outfile);
 
     for (int i = 0; i < n; i++) {
