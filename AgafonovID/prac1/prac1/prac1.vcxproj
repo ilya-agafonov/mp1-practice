@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -130,12 +130,14 @@
     <ClCompile Include="address.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="store.c" />
+    <ClCompile Include="StoresLib.c" />
     <ClCompile Include="time.c" />
     <ClCompile Include="worktime.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="address.h" />
     <ClInclude Include="store.h" />
+    <ClInclude Include="StoresLib.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="worktime.h" />
   </ItemGroup>

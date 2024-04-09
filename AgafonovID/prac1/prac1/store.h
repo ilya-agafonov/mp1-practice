@@ -16,13 +16,6 @@ typedef struct {
     worktime store_worktime[7];
 }store;
 
-typedef struct
-{
-    store* stores;
-    int count;
-} StoresLib;
-//считывать магазины в библиотеку. Печать магазинов из библиотеки/или саму библиотеку
-//два прохода, считываем количество, выделяем память, считываем магазины
 void read(FILE* file, store* s1);
 void write(FILE* file, store* s);
 void alloc(store* s);

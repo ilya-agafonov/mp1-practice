@@ -30,6 +30,9 @@
     <ClCompile Include="time.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="StoresLib.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="store.h">
@@ -42,6 +45,9 @@
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="time.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="StoresLib.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>

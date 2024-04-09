@@ -1,57 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "store.h"
+#include <locale.h>
+#include "StoresLib.h"
 
 int main(int argc, char** argv) {
-    int n;
-    char* infilename, * outfilename;
-    infilename = argv[1];
-    outfilename = argv[2];
-    printf("infilename: %s\n", infilename);
-    printf("outfilename: %s\n", outfilename);
+    int answer;
+    char* infilename = argv[1], * outfilename = argv[2];
+    StoresLib storelib;
 
-    FILE* infile = fopen(infilename, "r");
-    if (infile == NULL) {
-        printf("failed to open infile\n");
-        exit(1);
+    setlocale(LC_ALL, "Rus");
+
+    read_stores(infilename, &storelib);
+    printf("Что вы хотите вывести? 1 - справочник магазинов, 2 - круглосуточные магазины\n");
+    scanf("%d", &answer);
+    switch (answer) {
+    case 1:
+        print_all_stores(outfilename, &storelib);
+        printf("В файл %s напечатаны все магазины\n", outfilename);
+        break;
+    case 2:
+        print_stores(outfilename, &storelib);
+        printf("В файл %s напечатаны круглосуточные магазины\n", outfilename);
+        break;
+    default:
+        printf("Неверный ввод\n");
+        break;
     }
 
-    fscanf(infile, "%d", &n);
-    store* stores = (store*)malloc(sizeof(store) * n);
-    if (stores == NULL) {
-        printf("memory allocation error\n");
-        exit(1);
+    for (int i = 0; i < storelib.count; i++) {
+        dealloc(&(storelib.stores[i]));
     }
-
-    for (int i = 0; i < n; i++) {
-        read(infile, &(stores[i]));
-    }
-    fclose(infile);
-
-    FILE* outfile = fopen(outfilename, "w");
-    if (outfile == NULL) {
-        printf("failed to open outfile\n");
-        exit(1);
-    }
-
-    for (int i = 0; i < n; i++) {
-        int go = 1;
-        for (int j = 0; j < 7; j++) {
-            if (around_the_clock(&(stores[i].store_worktime[j])) != 1) {
-                go = 0;
-                break;
-            }
-        }
-        if (go) {
-            write(outfile, &(stores[i]));
-        }
-    }
-    fclose(outfile);
-
-    for (int i = 0; i < n; i++) {
-        dealloc(&(stores[i]));
-    }
-    free(stores);
+    free(storelib.stores);
     
     return 0;
 }

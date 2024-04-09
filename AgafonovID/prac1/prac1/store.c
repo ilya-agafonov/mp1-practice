@@ -18,6 +18,7 @@ void dealloc(store* s) {
     free(s->type);
     free(s->phone);
     free(s->store_address.street);
+    free(s->store_worktime->workdays);
 }
 
 void read(FILE* file, store* s) {
