@@ -1,5 +1,21 @@
 #include "StoresLib.h"
 
+void alloc_lib(StoresLib* storelib, int k) {
+    storelib->count = k;
+    storelib->stores = (store*)malloc(sizeof(store) * storelib->count);
+    if (storelib->stores == NULL) {
+        printf("memory allocation error\n");
+        exit(1);
+    }
+}
+
+void dealloc_stores(StoresLib* storelib) {
+    for (int i = 0; i < storelib->count; i++) {
+        dealloc(&(storelib->stores[i]));
+    }
+    free(storelib->stores);
+}
+
 void read_stores(const char* infilename, StoresLib* storelib) {
     FILE* infile = fopen(infilename, "r");
     if (infile == NULL) {
@@ -36,10 +52,11 @@ void print_stores(const char* outfilename, StoresLib* storelib) {
             write(outfile, &(storelib->stores[i]));
         }
     }
+    
     fclose(outfile);
 }
 
-void print_all_stores(const char* outfilename, StoresLib* storelib) {
+void print_storelib(const char* outfilename, StoresLib* storelib) {
     FILE* outfile = fopen(outfilename, "w");
     if (outfile == NULL) {
         printf("failed to open infile\n");
@@ -49,4 +66,42 @@ void print_all_stores(const char* outfilename, StoresLib* storelib) {
         write(outfile, &(storelib->stores[i]));
     }
     fclose(outfile);
+}
+
+int count_24h(StoresLib* storelib) {
+    int count = 0;
+    for (int i = 0; i < storelib->count; i++) {
+        int go = 1;
+        for (int j = 0; j < 7; j++) {
+            if (around_the_clock(&(storelib->stores[i].store_worktime[j])) != 1) {
+                go = 0;
+                break;
+            }
+        }
+        if (go) {
+            count++;
+        }
+    }
+    return count;
+}
+
+StoresLib create_lib24h(StoresLib* storelib) {
+    int count = count_24h(storelib);
+    StoresLib lib24;
+    alloc_lib(&lib24, count);
+
+    int ind = 0;
+    for (int i = 0; i < storelib->count; i++) {
+        int go = 1;
+        for (int j = 0; j < 7; j++) {
+            if (around_the_clock(&(storelib->stores[i].store_worktime[j])) != 1) {
+                go = 0;
+                break;
+            }
+        }
+        if (go) {
+            lib24.stores[ind++] = storelib->stores[i];
+        }
+    }
+    return lib24;
 }

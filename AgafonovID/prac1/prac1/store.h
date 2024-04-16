@@ -21,3 +21,4 @@ void write(FILE* file, store* s);
 void alloc(store* s);
 void dealloc(store* s);
 
+
