@@ -14,12 +14,12 @@ void alloc(store* s) {
 
 void dealloc(store* s) {
     free(s->name);
+    free(s->store_address.street);
+    free(s->phone);
     free(s->specialization);
     free(s->type);
-    free(s->phone);
-    free(s->store_address.street);
     for (int i = 0; i < 7; i++) {
-        free(s->store_worktime->workdays[i]);
+        dealloc_workdays(&(s->store_worktime[i]));
     }
 }
 

@@ -15,4 +15,5 @@ typedef struct {
 void read_worktime(FILE* file, worktime* wt);
 void write_worktime(FILE* file, worktime* wt);
 void alloc_workdays(worktime* wt);
+void dealloc_workdays(worktime* wt);
 int around_the_clock(worktime* wt);

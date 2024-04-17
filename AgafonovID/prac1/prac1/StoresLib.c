@@ -9,11 +9,15 @@ void alloc_lib(StoresLib* storelib, int k) {
     }
 }
 
-void dealloc_stores(StoresLib* storelib) {
-    for (int i = 0; i < storelib->count; i++) {
-        dealloc(&(storelib->stores[i]));
+void dealloc_stores(StoresLib* lib) {
+    printf("%d\n", lib->count);
+    for (int i = 0; i < lib->count; i++) {
+        if (&(lib->stores[i]) != NULL) {
+            printf("Очистка %d\n", i);
+            dealloc(&(lib->stores[i]));
+        }
     }
-    free(storelib->stores);
+    free(lib->stores);
 }
 
 void read_stores(const char* infilename, StoresLib* storelib) {
@@ -85,11 +89,17 @@ int count_24h(StoresLib* storelib) {
     return count;
 }
 
+
 StoresLib create_lib24h(StoresLib* storelib) {
     int count = count_24h(storelib);
     StoresLib lib24;
-    alloc_lib(&lib24, count);
-
+    //alloc_lib(&lib24, count);
+    lib24.count = count;
+    lib24.stores = (store*)malloc(sizeof(store) * lib24.count);
+    if (storelib->stores == NULL) {
+        printf("memory allocation error\n");
+        exit(1);
+    }
     int ind = 0;
     for (int i = 0; i < storelib->count; i++) {
         int go = 1;

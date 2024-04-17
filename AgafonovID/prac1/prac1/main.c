@@ -10,28 +10,30 @@ int main(int argc, char** argv) {
 
     setlocale(LC_ALL, "Rus");
 
-    read_stores(infilename, &storelib);
+    
     printf("Что вы хотите вывести? 1 - справочник магазинов, 2 - круглосуточные магазины\n");
     scanf("%d", &answer);
     switch (answer) {
     case 1:
+        read_stores(infilename, &storelib);
         print_storelib(outfilename, &storelib);
         printf("В файл %s напечатаны все магазины\n", outfilename);
+        dealloc_stores(&storelib);
         break;
     case 2: {
+        read_stores(infilename, &storelib);
         StoresLib lib24h;
         lib24h = create_lib24h(&storelib);
         print_storelib(outfilename, &lib24h);
         printf("В файл %s напечатаны круглосуточные магазины\n", outfilename);
         dealloc_stores(&lib24h);
+        dealloc_stores(&storelib);
         break;
     }
     default:
         printf("Неверный ввод\n");
         break;
     }
-    
-    dealloc_stores(&storelib);
     
     return 0;
 }

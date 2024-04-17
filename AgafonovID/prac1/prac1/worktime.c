@@ -20,6 +20,10 @@ void alloc_workdays(worktime* wt) {
     }
 }
 
+void dealloc_workdays(worktime* wt) {
+    free(wt->workdays);
+}
+
 int around_the_clock(worktime* wt) {
     int tr = 1;
     if (wt->workhours_start.hours != 0 || wt->workhours_end.hours != 24 || wt->workhours_start.minutes != 0 || wt->workhours_end.minutes != 0) {
