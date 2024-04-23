@@ -5,6 +5,7 @@
 #include "time.h"
 
 #define MAX_DAYS_LEN 30
+#define MAX_LEN 255
 
 typedef struct {
     char* workdays;

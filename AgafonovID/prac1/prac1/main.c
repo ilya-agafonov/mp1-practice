@@ -8,8 +8,7 @@ int main(int argc, char** argv) {
     char* infilename = argv[1], * outfilename = argv[2];
     StoresLib storelib;
 
-    setlocale(LC_ALL, "Rus");
-
+    setlocale(LC_ALL, "");
     
     printf("Что вы хотите вывести? 1 - справочник магазинов, 2 - круглосуточные магазины\n");
     scanf("%d", &answer);
@@ -23,13 +22,13 @@ int main(int argc, char** argv) {
     case 2: {
         read_stores(infilename, &storelib);
         StoresLib lib24h;
-        lib24h = create_lib24h(&storelib);
+        create_lib24(&storelib, &lib24h);
         print_storelib(outfilename, &lib24h);
         printf("В файл %s напечатаны круглосуточные магазины\n", outfilename);
         dealloc_stores(&lib24h);
         dealloc_stores(&storelib);
         break;
-    }
+    }   
     default:
         printf("Неверный ввод\n");
         break;

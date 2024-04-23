@@ -5,32 +5,31 @@ void alloc_lib(StoresLib* storelib, int k) {
     storelib->stores = (store*)malloc(sizeof(store) * storelib->count);
     if (storelib->stores == NULL) {
         printf("memory allocation error\n");
-        exit(1);
+        return 0;;
     }
 }
 
 void dealloc_stores(StoresLib* lib) {
-    printf("%d\n", lib->count);
+    printf("Count stores = %d\n", lib->count);
     for (int i = 0; i < lib->count; i++) {
-        if (&(lib->stores[i]) != NULL) {
-            printf("Очистка %d\n", i);
-            dealloc(&(lib->stores[i]));
-        }
+        printf("Очистка %d\n", i);
+        dealloc(&(lib->stores[i]));
     }
     free(lib->stores);
+    
 }
 
 void read_stores(const char* infilename, StoresLib* storelib) {
     FILE* infile = fopen(infilename, "r");
     if (infile == NULL) {
         printf("failed to open infile\n");
-        exit(1);
+        return 0;;
     }
     fscanf(infile, "%d", &(storelib->count));
     storelib->stores = (store*)malloc(sizeof(store) * storelib->count);
     if (storelib->stores == NULL) {
         printf("memory allocation error\n");
-        exit(1);
+        return 0;;
     }
     for (int i = 0; i < storelib->count; i++) {
         read(infile, &(storelib->stores[i]));
@@ -38,33 +37,11 @@ void read_stores(const char* infilename, StoresLib* storelib) {
     fclose(infile);
 }
 
-void print_stores(const char* outfilename, StoresLib* storelib) {
-    FILE* outfile = fopen(outfilename, "w");
-    if (outfile == NULL) {
-        printf("failed to open infile\n");
-        exit(1);
-    }
-    for (int i = 0; i < storelib->count; i++) {
-        int go = 1;
-        for (int j = 0; j < 7; j++) {
-            if (around_the_clock(&(storelib->stores[i].store_worktime[j])) != 1) {
-                go = 0;
-                break;
-            }
-        }
-        if (go) {
-            write(outfile, &(storelib->stores[i]));
-        }
-    }
-    
-    fclose(outfile);
-}
-
 void print_storelib(const char* outfilename, StoresLib* storelib) {
     FILE* outfile = fopen(outfilename, "w");
     if (outfile == NULL) {
         printf("failed to open infile\n");
-        exit(1);
+        return 0;;
     }
     for (int i = 0; i < storelib->count; i++) {
         write(outfile, &(storelib->stores[i]));
@@ -89,29 +66,41 @@ int count_24h(StoresLib* storelib) {
     return count;
 }
 
-
-StoresLib create_lib24h(StoresLib* storelib) {
-    int count = count_24h(storelib);
-    StoresLib lib24;
-    //alloc_lib(&lib24, count);
-    lib24.count = count;
-    lib24.stores = (store*)malloc(sizeof(store) * lib24.count);
-    if (storelib->stores == NULL) {
-        printf("memory allocation error\n");
-        exit(1);
+int is24(store* s) {
+    int is = 1;
+    for (int i = 0; i < 7; i++) {
+        if (around_the_clock(&(s->store_worktime[i])) != 1) {
+            is = 0;
+            break;
+        }
     }
+    if (is) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+void create_lib24(StoresLib* storelib, StoresLib* lib24) {
+    int count = count_24h(storelib);
+    alloc_lib(lib24, count);
     int ind = 0;
     for (int i = 0; i < storelib->count; i++) {
-        int go = 1;
-        for (int j = 0; j < 7; j++) {
-            if (around_the_clock(&(storelib->stores[i].store_worktime[j])) != 1) {
-                go = 0;
-                break;
+        if (is24(&(storelib->stores[i])) == 1) {
+            alloc(&(lib24->stores[ind]));
+            strcpy(lib24->stores[ind].name, storelib->stores[i].name);
+            strcpy(lib24->stores[ind].store_address.street, storelib->stores[i].store_address.street);
+            lib24->stores[ind].store_address.house = storelib->stores[i].store_address.house;
+            strcpy(lib24->stores[ind].phone, storelib->stores[i].phone);
+            strcpy(lib24->stores[ind].specialization, storelib->stores[i].specialization);
+            strcpy(lib24->stores[ind].type, storelib->stores[i].type);
+            for (int j = 0; j < 7; j++) {
+                strcpy(lib24->stores[ind].store_worktime[j].workdays, storelib->stores[i].store_worktime[j].workdays);
+                lib24->stores[ind].store_worktime[j].workhours_start = storelib->stores[i].store_worktime[j].workhours_start;
+                lib24->stores[ind].store_worktime[j].workhours_end = storelib->stores[i].store_worktime[j].workhours_end;
             }
-        }
-        if (go) {
-            lib24.stores[ind++] = storelib->stores[i];
+            ind++;
         }
     }
-    return lib24;
 }

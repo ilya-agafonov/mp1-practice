@@ -2,9 +2,9 @@
 #include "time.h"
 
 void read_worktime(FILE* file, worktime* wt) {
-    alloc_workdays(wt);
-    fscanf(file, "%s", wt->workdays);
-    fscanf(file, "%d:%d-%d:%d", &(wt->workhours_start.hours), &(wt->workhours_start.minutes), &(wt->workhours_end.hours), &(wt->workhours_end.minutes));
+    char buffer[MAX_LEN];
+    fgets(buffer, MAX_LEN, file);
+    sscanf(buffer, "%s %d:%d-%d:%d", wt->workdays, &(wt->workhours_start.hours), &(wt->workhours_start.minutes), &(wt->workhours_end.hours), &(wt->workhours_end.minutes));
 }
 
 void write_worktime(FILE* file, worktime* wt) {
@@ -13,11 +13,13 @@ void write_worktime(FILE* file, worktime* wt) {
 }
 
 void alloc_workdays(worktime* wt) {
+    wt->workdays = NULL;
     wt->workdays = (char*)malloc(sizeof(char) * MAX_DAYS_LEN);
     if (wt->workdays == NULL) {
         printf("memory allocation error\n");
-        exit(1);
+        return 0;;
     }
+    strcpy(wt->workdays, "");
 }
 
 void dealloc_workdays(worktime* wt) {
