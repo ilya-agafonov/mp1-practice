@@ -8,7 +8,12 @@ int main(int argc, char** argv) {
     char* infilename = argv[1], * outfilename = argv[2];
     StoresLib storelib;
 
-    setlocale(LC_ALL, "");
+    if (argc < 3) {
+        printf("Ќеверные аргументы\n");
+        return 0;
+    }
+
+    setlocale(LC_ALL, "Rus");
     
     printf("„то вы хотите вывести? 1 - справочник магазинов, 2 - круглосуточные магазины\n");
     scanf("%d", &answer);

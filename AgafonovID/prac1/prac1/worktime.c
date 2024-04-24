@@ -17,9 +17,8 @@ void alloc_workdays(worktime* wt) {
     wt->workdays = (char*)malloc(sizeof(char) * MAX_DAYS_LEN);
     if (wt->workdays == NULL) {
         printf("memory allocation error\n");
-        return 0;;
+        return 0;
     }
-    strcpy(wt->workdays, "");
 }
 
 void dealloc_workdays(worktime* wt) {

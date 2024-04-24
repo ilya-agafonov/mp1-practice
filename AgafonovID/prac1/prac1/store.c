@@ -27,7 +27,6 @@ void dealloc(store* s) {
     free(s->type);
     for (int i = 0; i < 7; i++) {
         dealloc_workdays(&(s->store_worktime[i]));
-        printf("worktime clear %d\n", i);
     }
 }
 
