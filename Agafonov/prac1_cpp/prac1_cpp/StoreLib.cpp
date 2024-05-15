@@ -10,9 +10,6 @@ StoreLib::StoreLib(int count) {
     this->stores = new Store[this->count];
 }
 
-StoreLib::StoreLib(std::string& filename) {
-
-}
 
 StoreLib::StoreLib(const StoreLib& lib) {
     this->count = lib.count;
@@ -30,6 +27,14 @@ std::ifstream& operator>>(std::ifstream& in, StoreLib& lib) {
     in >> lib.count;
     lib = StoreLib(lib.count);
     for (int i = 0; i < lib.count; i++) {
-        
+        in >> lib.stores[i];
     }
+    return in;
+}
+
+std::ofstream& operator<<(std::ofstream& out, StoreLib& lib) {
+    for (int i = 0; i < lib.count; i++) {
+        out << lib.stores[i];
+    }
+    return out;
 }

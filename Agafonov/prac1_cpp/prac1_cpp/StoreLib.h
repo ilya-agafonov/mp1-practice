@@ -11,7 +11,7 @@ private:
 public:
     StoreLib();
     StoreLib(int count);
-    StoreLib(std::string&);
+    //StoreLib(std::string&);
     StoreLib(const StoreLib&);
     ~StoreLib();
 

@@ -6,5 +6,5 @@ WorkTime::WorkTime() {
 }
 
 WorkTime::~WorkTime() {
-    delete[] workdays;
+    delete workdays;
 }
