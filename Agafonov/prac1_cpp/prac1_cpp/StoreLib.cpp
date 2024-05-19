@@ -10,7 +10,6 @@ StoreLib::StoreLib(int count) {
     this->stores = new Store[this->count];
 }
 
-
 StoreLib::StoreLib(const StoreLib& lib) {
     this->count = lib.count;
     this->stores = new Store[this->count];
@@ -24,17 +23,20 @@ StoreLib::~StoreLib() {
 }
 
 std::ifstream& operator>>(std::ifstream& in, StoreLib& lib) {
-    in >> lib.count;
-    lib = StoreLib(lib.count);
+    in >> lib.count; 
+    in.ignore();
+    //lib = StoreLib(lib.count);
+    lib.stores = new Store[lib.count];
     for (int i = 0; i < lib.count; i++) {
         in >> lib.stores[i];
     }
     return in;
 }
 
-std::ofstream& operator<<(std::ofstream& out, StoreLib& lib) {
+std::ofstream& operator<<(std::ofstream& out, const StoreLib& lib) {
+    //out << "Всего магазинов " << lib.count << std::endl;
     for (int i = 0; i < lib.count; i++) {
-        out << lib.stores[i];
+        out << lib.stores[i] << std::endl;
     }
     return out;
 }

@@ -1,9 +1,10 @@
 #include <iostream>
-#include <locale.h>
+#include <fstream>
+#include <locale>
 #include "StoreLib.h"
-#include "store.h"
 
 int main(int argc, char** argv) {
+    //system("chcp 1251");
     char* infilename = argv[1], * outfilename = argv[2];
     int answer;
     StoreLib storelib;
@@ -13,37 +14,42 @@ int main(int argc, char** argv) {
         return 0;
     }
 
-    setlocale(LC_ALL, "Rus");
-        
-    std::cout << "infilename: " << infilename << std::endl;
-    std::cout << "outfilename: " << outfilename << std::endl;
+    std::setlocale(LC_ALL, "Rus");
 
-    std::ifstream A;
-    std::ofstream B;
+    std::ifstream infile(infilename);
+    if (!infile.is_open()) {
+        std::cout << "Input file not open" << std::endl;
+        return 1;
+    }
 
+    std::ofstream outfile(outfilename);
+    if (!outfile.is_open()) {
+        std::cout << "Output file not open" << std::endl;
+        infile.close();
+        return 1;
+    }
+
+    std::cout << "Что вывести? (1 - все магазины, 2 - круглосуточные магазины)" << std::endl;
+    while (!(std::cin >> answer) || (answer != 1 && answer != 2)) {
+        std::cout << "Неверный ввод" << std::endl;
+        std::cin.clear(); 
+    }
     switch (answer) {
     case 1:
-        A.open(infilename);
-        if (!A.is_open()) {
-            std::cout << "file A not open" << std::endl;
-        }
-        A >> storelib;
-        A.close();
+        infile >> storelib;
+        infile.close();
 
-        B.open(outfilename);
-        if (!B.is_open()) {
-            std::cout << "file B not open" << std::endl;
-        }
-        B << storelib << std::endl;
-        B.close();
+        outfile << storelib;
+        outfile.close();
+        std::cout << "В файл fileout.txt напечатаны все магазины" << std::endl;
         break;
     case 2:
 
         break;
     default:
-        throw "Incorrect in";
+        std::cout << "Incorrect in";
         break;
     }
-
+    
     return 0;
 }

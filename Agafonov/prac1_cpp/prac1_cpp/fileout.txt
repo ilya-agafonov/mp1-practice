@@ -1,26 +1,130 @@
-Гипер Лента
-ул.Родионова 200
-88007004111
-Гипермаркет
-Частная предприятие
-Пн 00:00-24:00
-Вт 00:00-24:00
-Ср 00:00-24:00
-Чт 00:00-24:00
-Пт 00:00-24:00
-Сб 00:00-24:00
-Вс 00:00-24:00
 
-Аптечество
-ул.Ванеева 231
-88003506034
-Аптека
-Частная предприятие
-Пн 00:00-24:00
-Вт 00:00-24:00
-Ср 00:00-24:00
-Чт 00:00-24:00
-Пт 00:00-24:00
-Сб 00:00-24:00
-Вс 00:00-24:00
+Продуктовый, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+
+undefind
+undefined, 0
+undefind
+undefind
+undefind
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
+undefined 00:00-00:00
 

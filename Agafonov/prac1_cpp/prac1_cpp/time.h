@@ -9,13 +9,7 @@ private:
     int minutes;
 public:
     Time();
-
-    friend std::ifstream& operator>>(std::ifstream& in, Time& time) {
-        in >> time.hours >> time.minutes;
-        return in;
-    }
-    friend std::ofstream& operator<<(std::ofstream& out, Time& time) {
-        out << time.hours << ":" << time.minutes;
-        return out;
-    }
+    Time(int h, int m);
+    friend std::istream& operator>>(std::istream& in, Time& time);
+    friend std::ostream& operator<<(std::ostream& out, const Time& time);
 };
