@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
     //system("chcp 1251");
     char* infilename = argv[1], * outfilename = argv[2];
     int answer;
-    StoreLib storelib;
+    StoreLib storelib, lib24;
 
     if (argc < 3) {
         std::cout << "Incorrect arguments" << std::endl;
@@ -44,7 +44,6 @@ int main(int argc, char** argv) {
         std::cout << "В файл fileout.txt напечатаны все магазины" << std::endl;
         break;
     case 2:
-
         break;
     default:
         std::cout << "Incorrect in";

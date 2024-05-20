@@ -7,13 +7,23 @@ Store::Store() {
     this->type = "undefind";
 }
 
-Store::Store(const Store& s1) {
-    this->name = s1.name;
-    this->phone = s1.phone;
-    this->specialization = s1.specialization;
-    this->type = s1.type;
-    this->store_address = s1.store_address;
-    this->store_worktime = s1.store_worktime;
+Store::Store(const Store& s) {
+    this->name = s.name;
+    this->phone = s.phone;
+    this->specialization = s.specialization;
+    this->type = s.type;
+    this->store_address = s.store_address;
+    this->store_worktime = s.store_worktime;
+}
+
+bool Store::is24() {
+    for (int i = 0; i < 7; i++) {
+        if (store_worktime.get_worktime_start(i).gethours() != 0 || store_worktime.get_worktime_start(i).getminutes() != 0 || 
+            store_worktime.get_worktime_end(i).gethours() != 24 || store_worktime.get_worktime_end(i).getminutes() != 0 ) {
+            return false;
+        }
+    }
+    return true;
 }
 
 std::ifstream& operator>>(std::ifstream& in, Store& s) {
@@ -23,6 +33,7 @@ std::ifstream& operator>>(std::ifstream& in, Store& s) {
     std::getline(in, s.specialization);
     std::getline(in, s.type);
     in >> s.store_worktime;
+    in.ignore();
     return in;
 }
 

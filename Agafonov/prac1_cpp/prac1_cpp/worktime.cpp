@@ -6,6 +6,14 @@ WorkTime::WorkTime() {
      }
 }
 
+Time WorkTime::get_worktime_start(int day) {
+    return worktime_start[day];
+}
+
+Time WorkTime::get_worktime_end(int day) {
+    return worktime_end[day];
+}
+
 std::istream& operator>>(std::istream& in, WorkTime& wt) {
     char ch;
     for (int i = 0; i < 7; i++) {

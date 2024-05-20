@@ -10,9 +10,17 @@ Time::Time(int h, int m) {
     this->minutes = m;
 }
 
+int Time::gethours() {
+    return hours;
+}
+
+int Time::getminutes() {
+    return minutes;
+}
+
 std::istream& operator>>(std::istream& in, Time& time) {
     char ch;
-    in >> time.hours >> ch >> time.minutes;
+    in >> time.hours >> ch >>time.minutes;
     return in;
 }
 std::ostream& operator<<(std::ostream& out, const Time& time) {
