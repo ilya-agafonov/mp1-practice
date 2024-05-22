@@ -14,7 +14,7 @@ public:
     StoreLib(int count);
     StoreLib(const StoreLib&);
     ~StoreLib();
-    int count24(StoreLib&);
+    int count24(StoreLib&);//здесь ли это написать?
 
     friend std::ifstream& operator>>(std::ifstream& in, StoreLib& lib);
     friend std::ofstream& operator<<(std::ofstream& out, const StoreLib& lib);

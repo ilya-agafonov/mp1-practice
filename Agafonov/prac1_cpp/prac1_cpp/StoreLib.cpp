@@ -49,5 +49,5 @@ std::ofstream& operator<<(std::ofstream& out, const StoreLib& lib) {
     for (int i = 0; i < lib.count; i++) {
         out << lib.stores[i] << std::endl;
     }
-    return out;
+    return out; //стоит перегрузить вывод магазинов, а не библиотеки?
 }

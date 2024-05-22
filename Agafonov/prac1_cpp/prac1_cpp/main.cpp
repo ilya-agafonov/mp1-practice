@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
         return 0;
     }
 
-    std::setlocale(LC_ALL, "Rus");
+    setlocale(LC_ALL, "Rus");
 
     std::ifstream infile(infilename);
     if (!infile.is_open()) {
@@ -44,6 +44,8 @@ int main(int argc, char** argv) {
         std::cout << "В файл fileout.txt напечатаны все магазины" << std::endl;
         break;
     case 2:
+        infile >> storelib;
+        infile.close();
         break;
     default:
         std::cout << "Incorrect in";
