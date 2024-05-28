@@ -27,13 +27,17 @@ bool Store::is24() {
 }
 
 std::ifstream& operator>>(std::ifstream& in, Store& s) {
-    std::getline(in, s.name);
+    std::getline(in, s.name, ',');
+    in.ignore(1, ' ');
     in >> s.store_address;
-    std::getline(in, s.phone);
-    std::getline(in, s.specialization);
-    std::getline(in, s.type);
+    in.ignore(1, ' ');
+    std::getline(in, s.phone, ',');
+    in.ignore(1, ' ');
+    std::getline(in, s.specialization, ',');
+    in.ignore(1, ' ');
+    std::getline(in, s.type, ',');
+    in.ignore(1, ' ');
     in >> s.store_worktime;
-    in.ignore();
     return in;
 }
 

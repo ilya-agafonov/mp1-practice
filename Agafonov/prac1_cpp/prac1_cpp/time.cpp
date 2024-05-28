@@ -10,11 +10,11 @@ Time::Time(int h, int m) {
     this->minutes = m;
 }
 
-int Time::gethours() {
+int Time::gethours() const {
     return hours;
 }
 
-int Time::getminutes() {
+int Time::getminutes() const {
     return minutes;
 }
 

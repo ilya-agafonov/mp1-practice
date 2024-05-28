@@ -17,8 +17,8 @@ private:
 public:
     Store();
     Store(const Store&);
-    bool is24(); //const?
-    int count24(Store&);
+    bool is24();
+
     friend std::ifstream& operator>>(std::ifstream& in, Store& s);
     friend std::ostream& operator<<(std::ostream& out, const Store& s);
 };

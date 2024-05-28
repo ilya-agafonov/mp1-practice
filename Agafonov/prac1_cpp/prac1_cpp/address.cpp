@@ -7,7 +7,7 @@ Address::Address() {
 
 std::istream& operator>>(std::istream& in, Address& address) {
     in >> address.street >> address.house;
-    in.ignore();
+    in.ignore(1, ' ');
     return in;
 }
 std::ostream& operator<<(std::ostream& out, const Address& address) {

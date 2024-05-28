@@ -18,14 +18,26 @@ StoreLib::StoreLib(const StoreLib& lib) {
     }
 }
 
+StoreLib StoreLib::get24stores() {
+    int k = count24();
+    StoreLib lib(k);
+    int ind = 0;
+    for (int i = 0; i < count; i++) {
+        if (stores[i].is24()) {
+            lib.stores[ind++] = stores[i];
+        }
+    }
+    return lib;
+}
+
 StoreLib::~StoreLib() {
     delete[] this->stores;
 }
 
-int StoreLib::count24(StoreLib& lib) {
+int StoreLib::count24() {
     int k = 0;
-    for (int i = 0; i < lib.count; i++) {
-        if (lib.stores[i].is24()) {
+    for (int i = 0; i < count; i++) {
+        if (stores[i].is24()) {
             k++;
         }
     }
@@ -35,12 +47,9 @@ int StoreLib::count24(StoreLib& lib) {
 std::ifstream& operator>>(std::ifstream& in, StoreLib& lib) {
     in >> lib.count;
     in.ignore();
-    //lib = StoreLib(lib.count);
     lib.stores = new Store[lib.count];
     for (int i = 0; i < lib.count; i++) {
-        in >> lib.stores[i];
-        in.ignore();
-        
+        in >> lib.stores[i];        
     }
     return in;
 }
@@ -49,5 +58,18 @@ std::ofstream& operator<<(std::ofstream& out, const StoreLib& lib) {
     for (int i = 0; i < lib.count; i++) {
         out << lib.stores[i] << std::endl;
     }
-    return out; //стоит перегрузить вывод магазинов, а не библиотеки?
+    return out; 
+}
+
+StoreLib& StoreLib::operator=(const StoreLib& lib) {
+    if (this == &lib) {
+        return *this;
+    }
+    delete[] stores;
+    count = lib.count;
+    stores = new Store[count];
+    for (int i = 0; i < count; ++i) {
+        stores[i] = lib.stores[i];
+    }
+    return *this;
 }
