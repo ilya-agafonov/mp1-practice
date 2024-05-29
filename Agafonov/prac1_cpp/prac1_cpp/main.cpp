@@ -4,15 +4,16 @@
 #include "StoreLib.h"
 
 int main(int argc, char** argv) {
-    char* infilename = argv[1], * outfilename = argv[2];
-    int answer, flag = 0;
-    StoreLib storelib, lib24;
+    char* infilename, * outfilename;
+    int answer, flag = 0;    
 
     if (argc < 3) {
         std::cout << "Incorrect arguments" << std::endl;
         return 0;
     }
 
+    infilename = argv[1];
+    outfilename = argv[2];
     setlocale(LC_ALL, "Rus");
 
     std::ifstream infile(infilename);
@@ -28,40 +29,37 @@ int main(int argc, char** argv) {
     }
 
     std::cout << "Что вывести? (1 - все магазины, 2 - круглосуточные магазины)" << std::endl;
-    do {
-        std::cin >> answer;
-        if (std::cin.fail()) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Неверный символ. Попробуйте еще" << std::endl;
-        }
-        else {
-            switch (answer) {
-            case 1:
-                infile >> storelib;
-                infile.close();
+    std::cin >> answer;
+    switch (answer) {
+    case 1:
+    {
+        StoreLib storelib;
+        infile >> storelib;
+        infile.close();
 
-                outfile << storelib;
-                outfile.close();
-                std::cout << "В файл " << outfilename << " напечатаны все магазины" << std::endl;
-                flag = 1;
-                break;
-            case 2:
-                infile >> storelib;
-                infile.close();
+        outfile << storelib;
+        outfile.close();
+        std::cout << "В файл " << outfilename << " напечатаны все магазины" << std::endl;
+        flag = 1;
+        break;
+    }
+    case 2:
+    {
+        StoreLib storelib, lib24;
+        infile >> storelib;
+        infile.close();
 
-                lib24 = storelib.get24stores();
+        lib24 = storelib.get24stores();
 
-                outfile << lib24;
-                outfile.close();
-                std::cout << "В файл " << outfilename << " напечатаны круглосуточные магазины" << std::endl;
-                flag = 1;
-                break;
-            default:
-                std::cout << "Неверный ввод" << std::endl;
-                break;
-            }
-        }
-    } while (!flag);
+        outfile << lib24;
+        outfile.close();
+        std::cout << "В файл " << outfilename << " напечатаны круглосуточные магазины" << std::endl;
+        flag = 1;
+        break;
+    }
+    default:
+        std::cout << "Неверный ввод" << std::endl;
+        break;
+    }
     return 0;
 }

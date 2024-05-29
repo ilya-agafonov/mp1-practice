@@ -16,7 +16,7 @@ Store::Store(const Store& s) {
     this->store_worktime = s.store_worktime;
 }
 
-bool Store::is24() {
+bool Store::is24() const {
     for (int i = 0; i < 7; i++) {
         if (store_worktime.get_worktime_start(i).gethours() != 0 || store_worktime.get_worktime_start(i).getminutes() != 0 || 
             store_worktime.get_worktime_end(i).gethours() != 24 || store_worktime.get_worktime_end(i).getminutes() != 0 ) {

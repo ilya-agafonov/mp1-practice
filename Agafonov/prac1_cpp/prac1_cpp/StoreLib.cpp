@@ -18,7 +18,7 @@ StoreLib::StoreLib(const StoreLib& lib) {
     }
 }
 
-StoreLib StoreLib::get24stores() {
+StoreLib StoreLib::get24stores() const {
     int k = count24();
     StoreLib lib(k);
     int ind = 0;
@@ -34,7 +34,7 @@ StoreLib::~StoreLib() {
     delete[] this->stores;
 }
 
-int StoreLib::count24() {
+int StoreLib::count24() const {
     int k = 0;
     for (int i = 0; i < count; i++) {
         if (stores[i].is24()) {
@@ -61,15 +61,18 @@ std::ofstream& operator<<(std::ofstream& out, const StoreLib& lib) {
     return out; 
 }
 
-StoreLib& StoreLib::operator=(const StoreLib& lib) {
+const StoreLib& StoreLib::operator=(const StoreLib& lib) {
     if (this == &lib) {
         return *this;
     }
-    delete[] stores;
-    count = lib.count;
-    stores = new Store[count];
-    for (int i = 0; i < count; ++i) {
-        stores[i] = lib.stores[i];
+    if (this->count != lib.count) {
+        delete[] this->stores;
+        this->count = lib.count;
+        this->stores = new Store[this->count];
+    }
+    
+    for (int i = 0; i < count; i++) {
+        this->stores[i] = lib.stores[i];
     }
     return *this;
 }

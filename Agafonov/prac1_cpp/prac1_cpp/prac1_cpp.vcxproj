@@ -155,7 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="baza.txt" />
-    <Text Include="baza2.txt" />
     <Text Include="fileout.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
