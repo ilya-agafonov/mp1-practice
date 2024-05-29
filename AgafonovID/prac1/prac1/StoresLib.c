@@ -48,19 +48,12 @@ void print_storelib(const char* outfilename, StoresLib* storelib) {
 }
 
 int is24(store* s) {
-    int is = 1;
     for (int i = 0; i < 7; i++) {
         if (around_the_clock(&(s->store_worktime[i])) != 1) {
-            is = 0;
-            break;
+            return 0;
         }
     }
-    if (is) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
+    return 1;
 }
 
 int count_24h(StoresLib* storelib) {

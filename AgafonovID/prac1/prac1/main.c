@@ -5,13 +5,15 @@
 
 int main(int argc, char** argv) {
     int answer;
-    char* infilename = argv[1], * outfilename = argv[2];
-    StoresLib storelib;
+    char* infilename, *outfilename;
+    StoresLib storelib, lib24h;
 
     if (argc < 3) {
         printf("Неверные аргументы\n");
         return 0;
     }
+    infilename = argv[1];
+    outfilename = argv[2];
 
     setlocale(LC_ALL, "Rus");
     
@@ -26,7 +28,6 @@ int main(int argc, char** argv) {
         break;
     case 2: {
         read_stores(infilename, &storelib);
-        StoresLib lib24h;
         create_lib24(&storelib, &lib24h);
         print_storelib(outfilename, &lib24h);
         printf("В файл %s напечатаны круглосуточные магазины\n", outfilename);
